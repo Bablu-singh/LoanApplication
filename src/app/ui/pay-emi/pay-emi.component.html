@@ -1,0 +1,54 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+
+<h2>Pay Emi</h2>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form #show="ngForm" (ngSubmit)="showDetails()">
+
+            <div class="form-group">
+                <label for="accountno">Account number: </label>
+                <input type="text" #acc='ngModel' name="accountno" ngModel class="form-control" pattern='[0-9]{3,}' required>
+                <div *ngIf="!acc.valid && acc.touched">
+                        <div *ngIf="acc.hasError('required')">
+                            <sup>*</sup>Please enter your accountno
+                        </div>
+                        <div *ngIf="acc.hasError('pattern')">
+                            <sup>*</sup> Account number can only be numberic
+                        </div>
+                    </div>
+            </div>
+
+            <input type="submit" value="Show Details" class="btn btn-success">
+        </form>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+    <div class="col-md-5" *ngIf="successmsg!='' ||  details!=''">
+        <h2>Message</h2>
+        <br>
+        <br>
+        <div class="shadow p-4 mb-4 bg-white">
+            <div *ngIf="successmsg!=''">
+                <h3>
+                    <p> {{successmsg}} </p>
+                </h3>
+            </div>
+
+            <div *ngIf="details!=''">
+                <h3>
+                    <p> {{details}} </p>
+                </h3>
+                <div *ngIf="details!='Loan is already paid'">
+                    <br><i>Do you want to pay?</i><br>
+                    <br>
+                    <button class="btn btn-success" (click)="pay()"><span>1. Yes</span></button><br>
+                    <br />
+                    <button class="btn btn-warning" (click)="notpay()"><span>2. No</span></button><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

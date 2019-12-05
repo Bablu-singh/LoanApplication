@@ -1,0 +1,37 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+
+<h2>Show Balance</h2>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form #balance="ngForm" (ngSubmit)="showBalance()">
+
+            <div class="form-group">
+                <label for="accountno">Account number: </label>
+                <input type="text" #acc='ngModel' name="accountno" ngModel class="form-control" pattern='[0-9]{3,}' required />
+                <div *ngIf="!acc.valid && acc.touched">
+                        <div *ngIf="acc.hasError('required')">
+                            <sup>*</sup>Please enter your accountno
+                        </div>
+                        <div *ngIf="acc.hasError('pattern')">
+                            <sup>*</sup> Account number can only be numberic
+                        </div>
+                    </div>
+            </div>
+
+            <input type="submit" value="Show Balance" class="btn btn-success">
+        </form>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+    <div class="col-md-5" *ngIf="balanceMsg!=''">
+        <h2>Balance</h2>
+        <br>
+        <br>
+        <div class="shadow p-4 mb-4 bg-white">
+            <h3>{{balanceMsg}}</h3>
+        </div>
+    </div>
+</div>

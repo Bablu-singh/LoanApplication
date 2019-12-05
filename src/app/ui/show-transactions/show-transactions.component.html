@@ -1,0 +1,52 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+
+<h2>Show Balance</h2>
+<br />
+<div class="row">
+    <form #show="ngForm" (ngSubmit)="showTrans()">
+
+        <div class="form-group">
+            <label for="accountno">Account number: </label>
+            <input type="text" #acc='ngModel' name="accountno" ngModel class="form-control" pattern='[0-9]{3,}'  required />
+            <div *ngIf="!acc.valid && acc.touched">
+                    <div *ngIf="acc.hasError('required')">
+                        <sup>*</sup>Please enter your accountno
+                    </div>
+                    <div *ngIf="acc.hasError('pattern')">
+                        <sup>*</sup> Account number can only be numberic
+                    </div>
+                </div>
+        </div>
+
+        <input type="submit" value="Show Transactions" class="btn btn-success">
+    </form>
+</div>
+<br>
+<br>
+
+<div *ngIf="success==true">
+
+    <form #search='ngForm' (ngSubmit)="onSearch()" class="form-group has-search" style='display:inline;'>
+        <label for="searchItem"><b>Search Transactions(Id)</b></label>
+        <input type="text" name="searchItem" class="form-control" placeholder="Search by trans_id" ngModel>
+    </form>
+    <table class="table">
+        <tr>
+            <th>Trans Id:</th>
+            <th>Time of Payment</th>
+            <th>Amount Paid</th>
+            <th>Balance Amount</th>
+
+        </tr>
+        <tr *ngFor="let e of transactions">
+            <td>{{e.trans_id}}</td>
+            <td>{{e.timeOfPayment|date:'EEEE, MMMM d, y, h:mm:ss a'}}</td>
+            <td>{{e.amountPaid}}</td>
+            <td>{{e.balanceAmount}}</td>
+        </tr>
+    </table>
+
+</div>

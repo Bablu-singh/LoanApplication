@@ -1,0 +1,125 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+
+<h2>Apply Loan</h2>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form #loan="ngForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="accountno">Account no: </label>
+                <input type="text" #acc='ngModel' [(ngModel)]="accno" name="accountno" ngModel class="form-control"
+                    pattern='[0-9]{2,}' required disabled />
+                <div *ngIf="!acc.valid && acc.touched">
+                    <div *ngIf="acc.hasError('required')">
+                        <sup>*</sup>Please enter your accountno
+                    </div>
+                    <div *ngIf="acc.hasError('pattern')">
+                        <sup>*</sup> Account number can only be numberic
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount: </label>
+                <input type="text" #loana='ngModel' [(ngModel)]="loanamt" name="loan_amount" ngModel
+                    class="form-control" pattern='[0-9]{5,}' required />
+                <div *ngIf="!loana.valid && loana.touched">
+                    <div *ngIf="loana.hasError('required')">
+                        <sup>*</sup>Please enter the Amount
+                    </div>
+                    <div *ngIf="loana.hasError('pattern')">
+                        <sup>*</sup> Amount should be > 9999
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="intrest">Type Of Loan: </label><br />
+                <input type="radio" #intrest1='ngModel' [(ngModel)]="intrest" name="intrest" value="2.3" ngModel
+                    required />Home loan<br />
+                <input type="radio" #intrest1='ngModel' [(ngModel)]="intrest" name="intrest" value="3.2" ngModel
+                    required />Student loan<br />
+                <input type="radio" #intrest1='ngModel' [(ngModel)]="intrest" name="intrest" value="1.2" ngModel
+                    required />Simple Loan<br />
+
+                <div *ngIf="!intrest1.valid">
+                    <div *ngIf="intrest1.hasError('required')">
+                        <sup>*</sup>Please choose one
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration(In years): </label>
+                <select #dur='ngModel' [(ngModel)]="duration" name="duration" ngModel class="form-control" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+
+                <div *ngIf="!dur.valid ">
+                    <div *ngIf="dur.hasError('required')">
+                        <sup>*</sup>Please choose duration period
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-success" [disabled]="loan.form.status=='INVALID'">
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+
+    <div class="col-md-5" *ngIf="accno!=''">
+        <div *ngIf="msg==''">
+            <h2>Data Entered By User</h2>
+            <br>
+            <br>
+            <div class="shadow p-4 mb-4 bg-white">
+                <table>
+                    <tr *ngIf="accno!=''">
+                        <td><b>Account no:&nbsp;&nbsp;&nbsp;</b></td>
+                        <td>{{accno}}</td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr *ngIf="loanamt!=''">
+                        <td><b>Loan Amount:&nbsp;&nbsp;&nbsp;</b></td>
+                        <td>{{loanamt}}</td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr *ngIf="intrest!=''">
+                        <td><b>Intrest:&nbsp;&nbsp;&nbsp;</b></td>
+                        <td>{{intrest}}</td>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr *ngIf="duration!=''">
+                        <td><b>Duration(In years):&nbsp;&nbsp;&nbsp;</b></td>
+                        <td>{{duration}}</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        <div *ngIf="msg!=''">
+            <div class="shadow p-4 mb-4 bg-white">
+                <h4> {{msg}} </h4>
+            </div>
+        </div>
+
+    </div>
+</div>

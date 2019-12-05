@@ -1,0 +1,121 @@
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+
+
+<h2>Add Customer</h2>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form #customer="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <input type="text" #name='ngModel' [(ngModel)]="name1" name="name" ngModel class="form-control"
+                    pattern="[A-Z][A-Za-z\\s]{3,}" required>
+                <div *ngIf="!name.valid && name.touched">
+                    <div *ngIf="name.hasError('required')">
+                        <sup>*</sup>Please enter your name
+                    </div>
+                    <div *ngIf="name.hasError('pattern')">
+                        <sup>*</sup> Name should be start with capital letter
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input type="email" #email='ngModel' [(ngModel)]="email1" name="email" ngModel class="form-control"
+                    #email="ngModel" required
+                    pattern="^[a-zA-z]{1,}[0-9a-zA-Z]+@{1}[a-zA-Z]{1,}(.com|.in|.net|.co.in)$">
+                <div *ngIf="!email.valid && email.touched">
+                    <div *ngIf="email.hasError('required')">
+                        <sup>*</sup>Please enter your email
+                    </div>
+                    <div *ngIf="email.hasError('pattern')">
+                        <sup>*</sup> Email format is not correct
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone: </label>
+                <input type="text" #phone='ngModel' [(ngModel)]="phone1" name="phone" ngModel class="form-control"
+                    #phone="ngModel" pattern="[6-9][0-9]{9}" required>
+
+                <div *ngIf="!phone.valid && phone.touched">
+                    <div *ngIf="phone.hasError('required')">
+                        <sup>*</sup>Please enter your mobile no
+                    </div>
+                    <div *ngIf="phone.hasError('pattern')">
+                        <sup>*</sup>Mobile no should be start with 6,7,8,9
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address: </label>
+                <textarea #address='ngModel' minlength="10" [(ngModel)]="address1" name="address" ngModel class="form-control" #address="ngModel"
+                    minlength="10" required></textarea>
+                <div *ngIf="!address.valid && address.touched">
+                    <div *ngIf="address.hasError('required')">
+                        <sup>*</sup>Please enter your address
+                    </div>
+                    <div *ngIf="address.hasError('minlength')">
+                        <sup>*</sup> Address should be >10 characters
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date Of Birth: </label>
+                <input type="date" #dob='ngModel' min="1965-01-01" max="1997-12-31" [(ngModel)]="dob1" name="dob" ngModel class="form-control" required>
+                <div *ngIf="!dob.valid">
+                        <div *ngIf="dob.hasError('min') || dob.hasError('max')">
+                            <sup>*</sup> Age should be min 21 and max 52
+                        </div>
+                    </div>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-success" [disabled]="customer.form.status=='INVALID'">
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3">&nbsp;</div>
+    <div class="col-md-5" *ngIf="name1!=''">
+        <h2>Data Entered By User</h2>
+        <br>
+        <br>
+        <div class="shadow p-4 mb-4 bg-white">
+            <table>
+                <tr *ngIf="name1!=''">
+                    <td><b>Name:&nbsp;&nbsp;&nbsp;</b></td>
+                    <td>{{name1}}</td>
+                </tr>
+                <br />
+                <br />
+                <tr *ngIf="email1!=''">
+                    <td><b>Email:&nbsp;&nbsp;&nbsp;</b></td>
+                    <td>{{email1}}</td>
+                </tr>
+                <br />
+                <br />
+                <tr *ngIf="phone1!=''">
+                    <td><b>Phone:&nbsp;&nbsp;&nbsp;</b></td>
+                    <td>{{phone1}}</td>
+                </tr>
+                <br />
+                <br />
+                <tr *ngIf="address1!=''">
+                    <td><b>Address:&nbsp;&nbsp;&nbsp;</b></td>
+                    <td>{{address1}}</td>
+                </tr>
+                <br />
+                <br />
+                <tr *ngIf="dob1!=''">
+                    <td><b>Date Of Birth:&nbsp;&nbsp;&nbsp;</b></td>
+                    <td>{{dob1}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
